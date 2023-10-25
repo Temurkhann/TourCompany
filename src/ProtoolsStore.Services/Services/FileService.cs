@@ -18,12 +18,13 @@ public class FileService : IFileService
     public async Task<Attachment> CreateAsync(IFormFile file)
     {
         var result = await FileHelper.SaveAsync(file, false);
-
+        
         var res = await _repository.AddAsync(
             new()
             {
                 Name = result.fileName,
-                Path = result.filePath
+                Path = result.filePath,
+                CreatedDate =  DateTime.UtcNow
             }) ?? new();
 
         await _repository.SaveChangesAsync();

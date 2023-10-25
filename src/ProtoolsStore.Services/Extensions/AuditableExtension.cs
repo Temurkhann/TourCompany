@@ -14,7 +14,6 @@ public static class AuditableExtension
     public static void Create(this Auditable auditable)
     {
         auditable.CreatedDate = DateTime.UtcNow;
-        auditable.CreatedBy = HttpContextHelper.UserId;
     }
 
     /// <summary>
@@ -24,6 +23,5 @@ public static class AuditableExtension
     public static void Update(this Auditable auditable)
     {
         auditable.UpdatedDate = DateTime.UtcNow;
-        auditable.UpdatedBy = HttpContextHelper.UserId;
     }
 }
