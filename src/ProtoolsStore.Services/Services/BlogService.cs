@@ -18,10 +18,11 @@ namespace ProtoolsStore.Services.Services
     {
         private readonly IRepository<Blog> repository;
         private readonly IMapper mapper;
-        private readonly FileService fileService;
+        private readonly IFileService fileService;
 
-        public BlogService(IRepository<Blog> repository, FileService fileService, IMapper mapper)
+        public BlogService(IRepository<Blog> repository, IFileService fileService, IMapper mapper)
         {
+            this.fileService = fileService;
             this.repository = repository;
             this.mapper = mapper;
         }

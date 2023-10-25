@@ -11,14 +11,4 @@ public class Auditable : BaseEntity
     /// Entity updated date GETTER & SETTER
     /// </summary>
     public DateTime? UpdatedDate { get; set; }
-    
-    /// <summary>
-    /// Entity created by GETTER & SETTER
-    /// </summary>
-    public long? CreatedBy { get; set; }
-
-    /// <summary>
-    /// Entity updated by GETTER & SETTER
-    /// </summary>
-    public long? UpdatedBy { get; set; }
 }

@@ -1,4 +1,4 @@
-
+﻿
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\NewFolder\" />
+    <ProjectReference Include="..\ProtoolsStore.Data\ProtoolsStore.Data.csproj" />
+    <ProjectReference Include="..\ProtoolsStore.Services\ProtoolsStore.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProtoolsStore.Data\ProtoolsStore.Data.csproj" />
-    <ProjectReference Include="..\ProtoolsStore.Services\ProtoolsStore.Services.csproj" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   
   <PropertyGroup>

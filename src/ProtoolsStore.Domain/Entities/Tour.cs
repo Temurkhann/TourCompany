@@ -15,7 +15,7 @@ public class Tour : Auditable, ILocalizationDescription, ILocalizationTitle
 {
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public decimal Price { get; set; }
+    public string Price { get; set; } = null!;
     public long AttachmentId { get; set; }
     public Attachment Attachment { get; set; } = null!;
 
