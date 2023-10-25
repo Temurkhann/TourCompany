@@ -25,9 +25,7 @@
     <ProjectReference Include="..\ProtoolsStore.Services\ProtoolsStore.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
+  
   
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

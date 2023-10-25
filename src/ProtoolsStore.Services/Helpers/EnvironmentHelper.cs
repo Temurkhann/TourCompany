@@ -18,7 +18,7 @@ public static class EnvironmentHelper
     /// <summary>
     /// Gets the relative attachment folder path.
     /// </summary>
-    public static string Attachment => "images";
+    public static string Attachment => "images";        
 
     /// <summary>
     /// Gets the full file path by combining the web root path and the "file" folder.

@@ -29,8 +29,8 @@ namespace ProtoolsStore.Services.Services
         public async Task<BlogViewModel> CreateAsync(BlogForCreationDTO dto)
         {
             Attachment file = default!;
-            if (dto.Attachment is not null)
-                file = await fileService.CreateAsync(dto.Attachment);
+            if (dto.Image is not null)
+                file = await fileService.CreateAsync(dto.Image);
 
             var mappedTour = mapper.Map<Blog>(dto);
             mappedTour.Attachment = file;

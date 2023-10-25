@@ -9,8 +9,8 @@ namespace ProtoolsStore.Domain.Entities
 {
     public class Contact : Auditable
     {
-        public string FullName { get; set; }
-        public string Phone { get; set; }
-        public string Message { get; set; }
+        public string FullName { get; set; } = null!;
+        public string Phone { get; set; } = null!;
+        public string Message { get; set; } = null!;
     }
 }

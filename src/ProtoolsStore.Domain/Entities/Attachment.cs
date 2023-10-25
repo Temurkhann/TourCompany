@@ -4,9 +4,8 @@ namespace ProtoolsStore.Domain.Entities;
 
 public class Attachment : Auditable
 {
-    public string Name { get; set; }
-    public string Path { get; set; }
+    public string Path { get; set; } = null!;
 
-    public Blog Blog { get; set; }
-    public Tour Tour { get; set; }  
+    public Blog Blog { get; set; } = null!;
+    public Tour Tour { get; set; } = null!;
 }

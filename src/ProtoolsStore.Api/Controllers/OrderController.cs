@@ -18,10 +18,10 @@ namespace ProtoolsStore.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderViewModel>> CreateAsync(OrderForCreationDTO dto)
+        public async Task<ActionResult<OrderViewModel>> CreateAsync([FromForm] OrderForCreationDTO dto)
             => Ok(await  orderService.CreateAsync(dto));
 
-        [HttpGet("{/all}")]
+        [HttpGet("{all}")]
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAll()
             => Ok(await orderService.GetAllAsync());
 

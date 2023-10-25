@@ -21,11 +21,11 @@ public class BlogController : ControllerBase
     public async Task<ActionResult<BlogViewModel>> CreateAsync([FromForm] BlogForCreationDTO blogForCreationDTO)
         => Ok(await blogService.CreateAsync(blogForCreationDTO));
 
-    [HttpGet("{Id:int}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<BlogViewModel>> GetAsync([FromRoute] long id)
         => Ok(await blogService.GetAsync(id));
 
-    [HttpGet("{/all")]
+    [HttpGet("{all}")]
     public async Task<ActionResult<IEnumerable<BlogViewModel>>> GetAll()
         => Ok(await blogService.GetAllAsync());
 }

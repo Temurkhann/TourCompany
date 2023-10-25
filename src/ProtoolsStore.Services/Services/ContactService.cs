@@ -23,15 +23,19 @@ public class ContactService : IContactService
         var mappedContact = _mapper.Map<Contact>(dto);
         mappedContact.Create();
         var result = await _repository.AddAsync(
-            mappedContact, true, default);
-
+            mappedContact);
+        await _repository.SaveChangesAsync();
         return _mapper.Map<ContactViewModel>(result);
     }
 
     public async Task<ContactViewModel> GetAsync(long id)
     {
-        return _mapper.Map<ContactViewModel>(
-            await _repository.GetAsync(x => x.Id == id));
+        var result = await _repository.GetAsync(x => x.Id == id);
+
+        if (result is null)
+            throw new HttpException("Contact not found with given id", 404);
+
+        return _mapper.Map<ContactViewModel>(result);
     }
 
     public async Task<IEnumerable<ContactViewModel>> GetAllAsync()
