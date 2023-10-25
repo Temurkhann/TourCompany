@@ -19,13 +19,13 @@ public class Tour : Auditable, ILocalizationDescription, ILocalizationTitle
     public long AttachmentId { get; set; }
     public Attachment Attachment { get; set; } = null!;
 
-    [JsonIgnore] public string TitleUz { get; set; } = null!;
-    [JsonIgnore] public string TitleRu { get; set; } = null!;
-    [JsonIgnore] public string TitleEn { get; set; } = null!;
+    public string TitleUz { get; set; } = null!;
+    public string TitleRu { get; set; } = null!;
+    public string TitleEn { get; set; } = null!;
 
-    [JsonIgnore] public string DescriptionUz { get; set; } = null!;
-    [JsonIgnore] public string DescriptionRu { get; set; } = null!;
-    [JsonIgnore] public string DescriptionEn { get; set; } = null!;
+    public string DescriptionUz { get; set; } = null!;
+    public string DescriptionRu { get; set; } = null!;
+    public string DescriptionEn { get; set; } = null!;
 
     public Tour SetLocalization(Localization localization = Localization.Uz)
     {
