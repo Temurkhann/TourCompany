@@ -26,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\settings.json" />
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
   
   <PropertyGroup>

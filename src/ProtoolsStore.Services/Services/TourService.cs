@@ -26,8 +26,8 @@ public class TourService : ITourService
     public async Task<TourViewModel> CreateAsync(TourForCreationDTO dto)
     {
         Attachment file = default!;
-        if (dto.Attachment is not null)
-            file = await _fileService.CreateAsync(dto.Attachment);
+        if (dto.Image is not null)
+            file = await _fileService.CreateAsync(dto.Image);
 
         var mappedTour = _mapper.Map<Tour>(dto);
         mappedTour.Attachment = file;
@@ -35,19 +35,26 @@ public class TourService : ITourService
         mappedTour.Create();
 
         var res = await _repository.AddAsync(mappedTour);
-
+        await _repository.SaveChangesAsync();
         return _mapper.Map<TourViewModel>(res);
     }
 
     public async Task<TourViewModel> GetAsync(long id)
     {
-        return _mapper.Map<TourViewModel>(
-            await _repository.GetAsync(x => x.Id == id));
+        var result = await _repository.GetAsync(
+            x => x.Id == id, 
+            new []{ "Attachment" });
+
+        if (result is null)
+            throw new HttpException("Tour type not found with given id", 404);
+
+        return _mapper.Map<TourViewModel>(result);
     }
 
     public async Task<IEnumerable<TourViewModel>> GetAllAsync()
     {
         return await Task.FromResult(_mapper.Map<IEnumerable<TourViewModel>>(
-            _repository.GetAll().AsEnumerable()));
+            _repository.GetAll(null, new []{ "Attachment" })
+                              .AsEnumerable()));
     }
 }

@@ -12,9 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region Logger configuration
 
-
 var logger = new LoggerConfiguration()
-    .MinimumLevel.Verbose()
+    .MinimumLevel.Error()
     .WriteTo.TelegramBot(
         "6475751262:AAGjQy_d41prHgf29fpY3_SLA0cY0kWlvcE", 
         "1400203874",
@@ -69,8 +68,7 @@ if (!Directory.Exists(EnvironmentHelper.AttachmentPath))
 if (!Directory.Exists(EnvironmentHelper.FilePath))
     Directory.CreateDirectory(EnvironmentHelper.FilePath);
 
-
-app.UseHttpsRedirection();
+app.UseHttpsRedirection();  
 
 app.UseCors("GivenDomain");
 
