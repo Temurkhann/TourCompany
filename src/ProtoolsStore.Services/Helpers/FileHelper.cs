@@ -12,10 +12,10 @@ public static class FileHelper
     public static async Task<(string fileName, string filePath)> SaveAsync(IFormFile file, bool isExist = false)
     {
         // genarate file destination
-        string fileName = isExist ? file.FileName : Guid.NewGuid().ToString("N") + "-" + file.FileName;
+        string fileName = Guid.NewGuid().ToString("N") + "-" + file.FileName.Replace(" ", "-");
         string filePath = Path.Combine(EnvironmentHelper.AttachmentPath, fileName);
 
-        // copy image to the destination as stream
+        // copy image to the destination as stream 
         FileStream fileStream = File.OpenWrite(filePath);
         await file.CopyToAsync(fileStream);
 
@@ -23,7 +23,7 @@ public static class FileHelper
         await fileStream.FlushAsync();
         fileStream.Close();
 
-        return (fileName, Path.Combine(EnvironmentHelper.FilePath, fileName));
+        return (fileName, Path.Combine(EnvironmentHelper.AttachmentPath, fileName));
     }
 
     /// <summary>

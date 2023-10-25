@@ -4,14 +4,11 @@ namespace ProtoolsStore.Services.DTOs;
 
 public class TourForCreationDTO
 {
-    public string TitleUz { get; set; } = null!;
-    public string TitleRu { get; set; } = null!;
-    public string TitleEn { get; set; } = null!;
+    public string Title { get; set; } = null!;
+    public string Location { get; set; } = null!;
+
+    public string Description { get; set; } = null!;
     
-    public string DescriptionUz { get; set; } = null!;
-    public string DescriptionRu { get; set; } = null!;
-    public string DescriptionEn { get; set; } = null!;
-    
-    public decimal Price { get; set; } 
-    public IFormFile Attachment { get; set; } = null!;
+    public string Price { get; set; }   
+    public IFormFile Image { get; set; } = null!;
 }

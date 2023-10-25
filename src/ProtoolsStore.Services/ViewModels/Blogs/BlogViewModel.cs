@@ -6,4 +6,6 @@ public class BlogViewModel
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string ImagePath { get; set; } = null!;
+    
+    public DateTime CreatedDate { get; set; }
 }
