@@ -21,12 +21,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\ProtoolsStore.Data\ProtoolsStore.Data.csproj" />
+    <ProjectReference Include="..\ProtoolsStore.Services\ProtoolsStore.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProtoolsStore.Data\ProtoolsStore.Data.csproj" />
-    <ProjectReference Include="..\ProtoolsStore.Services\ProtoolsStore.Services.csproj" />
+    <Content Include="wwwroot\settings.json" />
   </ItemGroup>
   
   <PropertyGroup>

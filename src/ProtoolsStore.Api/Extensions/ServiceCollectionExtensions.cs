@@ -2,11 +2,15 @@ using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ProtoolsStore.Domain.Configurations;
 using ProtoolsStore.Data.DbContexts;
+using ProtoolsStore.Data.IRepositories;
+using ProtoolsStore.Data.Repositories;
+using ProtoolsStore.Domain.Entities;
+using ProtoolsStore.Services.Interfaces;
+using ProtoolsStore.Services.Services;
 
 namespace ProtoolsStore.Api.Extensions;
 
@@ -18,6 +22,12 @@ public static class CollectionServiceExtensions
                 .Configure<ConnectionStrings>(configuration.GetSection(nameof(ConnectionStrings)));
         
         // Register custom services in there ...
+        services.AddScoped<IFileService, FileService>();
+        services.AddScoped<IRepository<Attachment>, Repository<Attachment>>();
+        services.AddScoped<IRepository<Contact>, Repository<Contact>>();
+        services.AddScoped<IRepository<Tour>, Repository<Tour>>();
+        services.AddScoped<IContactService, ContactService>();
+        services.AddScoped<ITourService, TourService>();
         
         return services;
     }

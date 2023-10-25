@@ -21,7 +21,7 @@ public class ContactService : IContactService
     public async Task<ContactViewModel> CreateAsync(ContactForCreationDTO dto)
     {
         var mappedContact = _mapper.Map<Contact>(dto);
-
+        mappedContact.Create();
         var result = await _repository.AddAsync(
             mappedContact, true, default);
 
