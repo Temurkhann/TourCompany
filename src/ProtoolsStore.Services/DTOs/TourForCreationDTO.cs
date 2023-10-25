@@ -5,7 +5,6 @@ namespace ProtoolsStore.Services.DTOs;
 public class TourForCreationDTO
 {
     public string Title { get; set; } = null!;
-    public string Location { get; set; } = null!;
 
     public string Description { get; set; } = null!;
     

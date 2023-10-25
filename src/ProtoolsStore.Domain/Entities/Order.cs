@@ -10,7 +10,7 @@ namespace ProtoolsStore.Domain.Entities
     public class Order : Auditable
     {
         public long TourId { get; set; }
-        public string FullName { get; set; }
-        public string Phone { get; set; }
+        public string FullName { get; set; } = null!;
+        public string Phone { get; set; } = null!;
     }
 }
