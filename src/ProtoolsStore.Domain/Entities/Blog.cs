@@ -24,7 +24,7 @@ namespace ProtoolsStore.Domain.Entities
         [JsonIgnore] public string DescriptionRu { get; set; } = null!;
         [JsonIgnore] public string DescriptionEn { get; set; } = null!;
 
-        public Tour SetLocalization(Localization localization = Localization.Uz)
+        public Blog SetLocalization(Localization localization = Localization.Uz)
         {
             Title = localization switch
             {
