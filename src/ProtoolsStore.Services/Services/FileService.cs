@@ -22,6 +22,7 @@ public class FileService : IFileService
         var res = await _repository.AddAsync(
             new()
             {
+                Name = result.fileName,
                 Path = Path.Combine(EnvironmentHelper.Attachment, result.fileName),
                 CreatedDate =  DateTime.UtcNow
             }) ?? new();
