@@ -55,8 +55,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseStaticFiles();
-
 // app services using information attached to classes
 EnvironmentHelper.WebRootPath = app.Services.GetRequiredService<IWebHostEnvironment>()?.WebRootPath;
 if (app.Services.GetService<IHttpContextAccessor>() != null)
@@ -67,6 +65,8 @@ if (!Directory.Exists(EnvironmentHelper.AttachmentPath))
     Directory.CreateDirectory(EnvironmentHelper.AttachmentPath);
 if (!Directory.Exists(EnvironmentHelper.FilePath))
     Directory.CreateDirectory(EnvironmentHelper.FilePath);
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();  
 

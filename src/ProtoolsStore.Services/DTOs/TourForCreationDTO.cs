@@ -9,5 +9,5 @@ public class TourForCreationDTO
     public string Description { get; set; } = null!;
     
     public string Price { get; set; }   
-    public IFormFile Image { get; set; } = null!;
+    public IFormFile? Image { get; set; }
 }

@@ -18,29 +18,29 @@ public class TourController : ControllerBase
     
     
     /// <summary>
-    /// Tur Paketlar yaratish
+    /// (Admin uchun) Tour Paketlar yaratish
     /// </summary>
-    /// <param name="dto"></param>
+    /// <param name="dto"> <see cref="TourForCreationDTO"/></param>
     /// <returns></returns>
-    [HttpPost()]
+    [HttpPost]
     public async Task<ActionResult<TourViewModel>> CreateAsync([FromForm]TourForCreationDTO dto)
     {
         return Ok(await _tourService.CreateAsync(dto));
     }
 
     /// <summary>
-    /// Tur Paketlarning birini id bilan olish
+    /// (Hamma userlar uchun) Tour Paketlarning birini id bilan olish
     /// </summary>
-    /// <param name="Id"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{Id:long}")]
-    public async Task<ActionResult<TourViewModel>> GetAsync([FromRoute]long Id)
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<TourViewModel>> GetAsync([FromRoute]long id)
     {
-        return Ok(await _tourService.GetAsync(Id));
+        return Ok(await _tourService.GetAsync(id));
     }
     
     /// <summary>
-    ///  Tur Paketlarni olish
+    /// (Hamma userlar uchun) Tour Paketlarni olish
     /// </summary>
     /// <returns></returns>
     [HttpGet("all")]

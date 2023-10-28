@@ -16,7 +16,7 @@ public class Tour : Auditable
     public string Title { get; set; } = null!;
     public string Description { get; set; } = null!;
     public string Price { get; set; } = null!;
-    public long AttachmentId { get; set; }
-    public Attachment Attachment { get; set; } = null!;
+    public long? AttachmentId { get; set; }
+    public Attachment? Attachment { get; set; }
 
 }

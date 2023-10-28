@@ -8,25 +8,39 @@ using System.Formats.Asn1;
 namespace ProtoolsStore.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("orders")]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderService orderService;
+        private readonly IOrderService _orderService;
         public OrderController(IOrderService orderService)
         {
-            this.orderService = orderService;
+            this._orderService = orderService;
         }
 
+        /// <summary>
+        /// (Hamma userlar uchun) yangi order yaratish
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<OrderViewModel>> CreateAsync([FromForm] OrderForCreationDTO dto)
-            => Ok(await  orderService.CreateAsync(dto));
+            => Ok(await  _orderService.CreateAsync(dto));
 
-        [HttpGet("{all}")]
+        /// <summary>
+        /// (Admin uchun) barcha orderlar ro'yhatini olish uchun
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAll()
-            => Ok(await orderService.GetAllAsync());
+            => Ok(await _orderService.GetAllAsync());
 
-        [HttpGet("{Id:int}")]
+        /// <summary>
+        /// (Admin uchun) id bilan orderlardan birini tanlab olish
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<OrderViewModel>> Get([FromRoute] long id)
-            => Ok (await orderService.GetAsync(id));
+            => Ok (await _orderService.GetAsync(id));
     }
 }

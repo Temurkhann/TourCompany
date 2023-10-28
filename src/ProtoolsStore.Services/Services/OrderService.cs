@@ -16,32 +16,48 @@ namespace ProtoolsStore.Services.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IRepository<Order> repository;
-        private readonly IMapper mapper;
-        public OrderService(IRepository<Order> repository, IMapper mapper)
+        private readonly IRepository<Order> _repository;
+        private readonly IRepository<Tour> _tourRepository;
+        private readonly IMapper _mapper;
+        public OrderService(
+            IRepository<Order> repository, 
+            IMapper mapper, 
+            IRepository<Tour> tourRepository)
         {
-            this.repository = repository;
-            this.mapper = mapper;
+            this._repository = repository;
+            this._mapper = mapper;
+            _tourRepository = tourRepository;
         }
         public async Task<OrderViewModel> CreateAsync(OrderForCreationDTO dto)
         {
-            var exsistOrder = await repository.GetAsync(d=>d.TourId == dto.TourId);
-            if (exsistOrder != null)
-                throw new HttpException("Order already exsist");
-            var order = await repository.AddAsync(mapper.Map<Order>(dto));
-            return mapper.Map<OrderViewModel>(order);
+            var existTour = await _tourRepository.GetAsync(x => x.Id == dto.TourId);
+            if (existTour is null)
+                throw new HttpException("Given tour type not exist in database", 400);
+
+            var mappedOrder = _mapper.Map<Order>(dto);
+            mappedOrder.Tour = existTour;
+            mappedOrder.Create();
+            
+            var order = await _repository.AddAsync(mappedOrder);
+            await _repository.SaveChangesAsync();
+            
+            return _mapper.Map<OrderViewModel>(order);
         }
 
         public async Task<IEnumerable<OrderViewModel>> GetAllAsync()
         {
-            return await Task.FromResult(mapper.Map<IEnumerable<OrderViewModel>>(
-            repository.GetAll().AsEnumerable()));
+            return await Task.FromResult(_mapper.Map<IEnumerable<OrderViewModel>>(
+            _repository.GetAll(null, new []{ "Tour" }).AsEnumerable()));
         }
 
         public async Task<OrderViewModel> GetAsync(long id)
         {
-            return mapper.Map<OrderViewModel>(
-            await repository.GetAsync(x => x.Id == id));
+            var existedOrder = await _repository.GetAsync(
+                x => x.Id == id, new[] { "Tour" });
+            if (existedOrder is null)
+                throw new HttpException("Order not found in database", 404);
+            
+            return _mapper.Map<OrderViewModel>(existedOrder);
         }
     }
 }

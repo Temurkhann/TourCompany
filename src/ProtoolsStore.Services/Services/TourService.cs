@@ -31,7 +31,7 @@ public class TourService : ITourService
 
         var mappedTour = _mapper.Map<Tour>(dto);
         mappedTour.Attachment = file;
-        mappedTour.AttachmentId = file.Id;
+        mappedTour.AttachmentId = file?.Id;
         mappedTour.Create();
 
         var res = await _repository.AddAsync(mappedTour);

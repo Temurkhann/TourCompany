@@ -57,7 +57,7 @@ namespace ProtoolsStore.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AttachmentId")
+                    b.Property<long?>("AttachmentId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
@@ -67,31 +67,7 @@ namespace ProtoolsStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("DescriptionEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DescriptionRu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DescriptionUz")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleRu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleUz")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -175,7 +151,7 @@ namespace ProtoolsStore.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<long>("AttachmentId")
+                    b.Property<long?>("AttachmentId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreatedDate")
@@ -185,35 +161,11 @@ namespace ProtoolsStore.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("DescriptionEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DescriptionRu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("DescriptionUz")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Price")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleEn")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleRu")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("TitleUz")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -232,9 +184,7 @@ namespace ProtoolsStore.Data.Migrations
                 {
                     b.HasOne("ProtoolsStore.Domain.Entities.Attachment", "Attachment")
                         .WithOne("Blog")
-                        .HasForeignKey("ProtoolsStore.Domain.Entities.Blog", "AttachmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProtoolsStore.Domain.Entities.Blog", "AttachmentId");
 
                     b.Navigation("Attachment");
                 });
@@ -243,20 +193,16 @@ namespace ProtoolsStore.Data.Migrations
                 {
                     b.HasOne("ProtoolsStore.Domain.Entities.Attachment", "Attachment")
                         .WithOne("Tour")
-                        .HasForeignKey("ProtoolsStore.Domain.Entities.Tour", "AttachmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProtoolsStore.Domain.Entities.Tour", "AttachmentId");
 
                     b.Navigation("Attachment");
                 });
 
             modelBuilder.Entity("ProtoolsStore.Domain.Entities.Attachment", b =>
                 {
-                    b.Navigation("Blog")
-                        .IsRequired();
+                    b.Navigation("Blog");
 
-                    b.Navigation("Tour")
-                        .IsRequired();
+                    b.Navigation("Tour");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,44 +16,44 @@ namespace ProtoolsStore.Services.Services
 {
     public class BlogService : IBlogService
     {
-        private readonly IRepository<Blog> repository;
-        private readonly IMapper mapper;
-        private readonly IFileService fileService;
+        private readonly IRepository<Blog> _repository;
+        private readonly IMapper _mapper;
+        private readonly IFileService _fileService;
 
         public BlogService(IRepository<Blog> repository, IFileService fileService, IMapper mapper)
         {
-            this.fileService = fileService;
-            this.repository = repository;
-            this.mapper = mapper;
+            this._fileService = fileService;
+            this._repository = repository;
+            this._mapper = mapper;
         }
         public async Task<BlogViewModel> CreateAsync(BlogForCreationDTO dto)
         {
             Attachment file = default!;
             if (dto.Image is not null)
-                file = await fileService.CreateAsync(dto.Image);
+                file = await _fileService.CreateAsync(dto.Image);
 
-            var mappedTour = mapper.Map<Blog>(dto);
+            var mappedTour = _mapper.Map<Blog>(dto);
             mappedTour.Attachment = file;
-            mappedTour.AttachmentId = file.Id;
+            mappedTour.AttachmentId = file?.Id;
 
-            var res = await repository.AddAsync(mappedTour);
-
-            return mapper.Map<BlogViewModel>(res);
+            var res = await _repository.AddAsync(mappedTour); 
+            await _repository.SaveChangesAsync();
+            return _mapper.Map<BlogViewModel>(res);
         }
 
         public async Task<IEnumerable<BlogViewModel>> GetAllAsync()
         {
-            return await Task.FromResult(mapper.Map<IEnumerable<BlogViewModel>>(
-            repository.GetAll().AsEnumerable()));
+            return await Task.FromResult(_mapper.Map<IEnumerable<BlogViewModel>>(
+            _repository.GetAll().AsEnumerable()));
         }
 
         public async Task<BlogViewModel> GetAsync(long id)
         {
-            var blog = await repository.GetAsync(expression => expression.Id == id);
-            if (blog != null)
-                throw new HttpException("Blog not found");
+            var existedBlog = await _repository.GetAsync(b => b.Id == id);
+            if (existedBlog == null)
+                throw new HttpException("Blog not found in database", 404);
 
-            return mapper.Map<BlogViewModel>(blog);
+            return _mapper.Map<BlogViewModel>(existedBlog);
         }
     }
 }

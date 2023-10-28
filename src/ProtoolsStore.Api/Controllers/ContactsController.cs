@@ -20,7 +20,7 @@ public class ContactsController : ControllerBase
     }
 
     /// <summary>
-    /// Companiya bilan aloqa bo'limi so'rovini yaratish
+    /// (Hamma userlar uchun) Companiya bilan aloqa bo'limi so'rovini yaratish
     /// </summary>
     /// <param name="dto"></param>
     /// <returns></returns>
@@ -31,18 +31,18 @@ public class ContactsController : ControllerBase
     }
 
     /// <summary>
-    /// Companiya bilan aloqa bo'limi so'rovining birini id bilan olish
+    /// (Admin uchun) Companiya bilan aloqa bo'limi so'rovining birini id bilan olish
     /// </summary>
-    /// <param name="Id"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("{Id:long}")]
-    public async Task<ActionResult<ContactViewModel>> GetAsync([FromRoute]long Id)
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<ContactViewModel>> GetAsync([FromRoute]long id)
     {
-        return Ok(await _contactService.GetAsync(Id));
+        return Ok(await _contactService.GetAsync(id));
     }
     
     /// <summary>
-    /// Companiya bilan aloqa bo'limi so'rovlarini olish
+    /// (Admin uchun) Companiya bilan aloqa bo'limi so'rovlarini olish
     /// </summary>
     /// <returns></returns>
     [HttpGet("all")]

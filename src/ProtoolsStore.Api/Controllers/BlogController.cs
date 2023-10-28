@@ -7,25 +7,39 @@ using ProtoolsStore.Services.ViewModels.Blogs;
 namespace ProtoolsStore.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("blog-posts")]
 public class BlogController : ControllerBase
 {
-    private readonly IBlogService blogService;
+    private readonly IBlogService _blogService;
 
     public BlogController(IBlogService blogService)
     {
-        this.blogService = blogService;
+        this._blogService = blogService;
     }
-
+    
+    /// <summary>
+    /// (Admin uchun) yangi blog uchun post yaratish 
+    /// </summary>
+    /// <param name="blogForCreationDTO"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<ActionResult<BlogViewModel>> CreateAsync([FromForm] BlogForCreationDTO blogForCreationDTO)
-        => Ok(await blogService.CreateAsync(blogForCreationDTO));
+        => Ok(await _blogService.CreateAsync(blogForCreationDTO));
 
-    [HttpGet("{id:int}")]
+    /// <summary>
+    /// (Hamma userlar uchun) postlardan birini id bilan olish
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id:long}")]
     public async Task<ActionResult<BlogViewModel>> GetAsync([FromRoute] long id)
-        => Ok(await blogService.GetAsync(id));
+        => Ok(await _blogService.GetAsync(id));
 
-    [HttpGet("{all}")]
+    /// <summary>
+    /// (Hamma userlar uchun) barcha postlarni olish uchun
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("all")]
     public async Task<ActionResult<IEnumerable<BlogViewModel>>> GetAll()
-        => Ok(await blogService.GetAllAsync());
+        => Ok(await _blogService.GetAllAsync());
 }

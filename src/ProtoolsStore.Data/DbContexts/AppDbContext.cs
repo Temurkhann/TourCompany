@@ -9,6 +9,15 @@ public sealed class AppDbContext : DbContext
     {
     }
 
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Tour>().Navigation(t => t.Attachment).AutoInclude();
+        modelBuilder.Entity<Blog>().Navigation(b => b.Attachment).AutoInclude();
+        modelBuilder.Entity<Order>().Navigation(b => b.Tour).AutoInclude();
+        base.OnModelCreating(modelBuilder);
+    }
+
     public DbSet<Tour> Tours { get; set; }
     public DbSet<Blog> Blogs { get; set; }
     public DbSet<Contact> Contacts { get; set; }
